@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Upload Portal — PAPERS LK</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-logo" onclick="window.location.href='index.html'">PAPERS <span>LK</span></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="stream.html?id=science">Science</a>
+        <a href="stream.html?id=commerce">Commerce</a>
+        <a href="stream.html?id=arts">Arts</a>
+        <a href="stream.html?id=technology">Technology</a>
+      </div>
+      <div class="nav-search">
+        <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" class="search-input" placeholder="Search subjects...">
+        <div class="search-results"></div>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header container" style="margin-top: calc(var(--navbar-height) + 0.5rem); padding-top: 1.5rem; padding-bottom: 1.5rem;">
+    <span class="badge badge-technology mb-2">Admin Panel</span>
+    <h1 class="page-header-title">Upload <span class="gradient-word">Resources</span></h1>
+    <p class="page-header-desc">Select metadata, drop your PDF past paper or marking scheme, and publish directly to your cloud Supabase database.</p>
+  </header>
+
+  <!-- Main Portal Grid -->
+  <main class="container mb-5" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem;">
+    
+    <!-- Upload Card Form -->
+    <section class="glass" style="padding: 2.25rem; border-radius: var(--border-radius); border: 1px solid var(--glass-border);">
+      <h3 style="font-size: var(--fs-xl); font-weight: 700; margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.75rem;">Paper Details</h3>
+      
+      <!-- Supabase Connection Alert -->
+      <div id="db-connection-status" class="badge" style="width: 100%; display: flex; justify-content: center; padding: 0.65rem 1rem; border-radius: 10px; font-weight: 600; margin-bottom: 1.5rem;">
+        Checking database configuration...
+      </div>
+
+      <form id="upload-form" onsubmit="return false;">
+        
+        <!-- Stream Selection -->
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: var(--fs-sm); font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">Subject Stream:</label>
+          <select id="admin-stream-select" style="width: 100%; padding: 0.75rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); color: var(--text-primary); outline: none;">
+            <option value="science">Science</option>
+            <option value="commerce">Commerce</option>
+            <option value="arts">Arts</option>
+            <option value="technology">Technology</option>
+          </select>
+        </div>
+
+        <!-- Subject Selection -->
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: var(--fs-sm); font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">Subject:</label>
+          <select id="admin-subject-select" style="width: 100%; padding: 0.75rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); color: var(--text-primary); outline: none;">
+            <!-- Updated dynamically -->
+          </select>
+        </div>
+
+        <!-- Year, Medium, and Type row -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <!-- Year -->
+          <div>
+            <label style="display: block; font-size: var(--fs-sm); font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">Examination Year:</label>
+            <input type="number" id="admin-year-input" value="2025" min="2010" max="2035" style="width: 100%; padding: 0.75rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); color: var(--text-primary); outline: none;">
+          </div>
+          <!-- Medium -->
+          <div>
+            <label style="display: block; font-size: var(--fs-sm); font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">Medium:</label>
+            <select id="admin-medium-select" style="width: 100%; padding: 0.75rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); color: var(--text-primary); outline: none;">
+              <option value="sinhala">Sinhala (සිංහල)</option>
+              <option value="tamil">Tamil (தமிழ்)</option>
+              <option value="english">English (English)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Paper Type -->
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: var(--fs-sm); font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary);">Paper Type:</label>
+          <select id="admin-type-select" style="width: 100%; padding: 0.75rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); color: var(--text-primary); outline: none;">
+            <option value="question-paper">Question Paper (QP)</option>
+            <option value="marking-scheme">Marking Scheme (MS)</option>
+          </select>
+        </div>
+
+        <!-- File Select Dropzone -->
+        <div id="dropzone" style="border: 2px dashed var(--glass-border); border-radius: var(--border-radius); padding: 2rem; text-align: center; cursor: pointer; transition: all var(--transition-fast); margin-bottom: 1.5rem; background: rgba(255,255,255,0.01);">
+          <div style="font-size: 2.25rem; margin-bottom: 0.5rem; opacity: 0.7;">📄</div>
+          <p style="font-weight: 600; font-size: var(--fs-sm); margin-bottom: 0.25rem;">Drag & drop your PDF file here</p>
+          <p style="color: var(--text-muted); font-size: var(--fs-xs);">or click to browse files (PDF only, max 10MB)</p>
+          <input type="file" id="admin-file-input" accept="application/pdf" style="display: none;">
+          <div id="selected-file-name" class="badge badge-science mt-3 hidden">No file selected</div>
+        </div>
+
+        <!-- Upload Button & Progress -->
+        <div id="upload-progress-container" class="hidden" style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; font-size: var(--fs-xs); color: var(--text-secondary); margin-bottom: 0.4rem;">
+            <span>Uploading to cloud storage...</span>
+            <span id="upload-progress-percent">0%</span>
+          </div>
+          <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 100px; overflow: hidden;">
+            <div id="upload-progress-bar" style="width: 0%; height: 100%; background: var(--gradient-primary); transition: width 0.1s ease;"></div>
+          </div>
+        </div>
+
+        <button type="submit" id="admin-upload-btn" class="btn btn-primary" style="width: 100%; padding: 0.9rem;" disabled>
+          Upload & Publish
+        </button>
+
+      </form>
+    </section>
+
+    <!-- Side Help Column -->
+    <aside style="display: flex; flexDirection: column; gap: 1.5rem;">
+      
+      <!-- Getting Started Help Card -->
+      <section class="glass" style="padding: 1.75rem; border-radius: var(--border-radius); border: 1px solid var(--glass-border);">
+        <h4 style="font-size: var(--fs-base); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>🚀</span> Database Setup Instructions
+        </h4>
+        <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+          To connect this dashboard to your cloud, make sure you configure your credentials in:
+          <br>
+          <a href="js/supabase-config.js" style="color: var(--accent-cyan); text-decoration: underline;">[js/supabase-config.js]</a>
+        </p>
+        <p style="font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.5;">
+          Once configure fields, paste the table creation SQL commands from the implementation plan inside the <strong>SQL Editor</strong> tab on your Supabase dashboard and hit run.
+        </p>
+      </section>
+
+      <!-- Recent Uploads Panel -->
+      <section class="glass" style="padding: 1.75rem; border-radius: var(--border-radius); border: 1px solid var(--glass-border); flex-grow: 1;">
+        <h4 style="font-size: var(--fs-base); font-weight: 700; margin-bottom: 1rem;">Recent Uploads</h4>
+        <div id="recent-uploads-list" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: var(--fs-sm);">
+          <!-- Populated by admin.js -->
+          <div style="color: var(--text-muted); font-style: italic; text-align: center; padding-top: 2rem;">
+            No uploads in this session yet.
+          </div>
+        </div>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Core Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Admin Script -->
+  <script src="js/admin.js"></script>
+</body>
+</html>

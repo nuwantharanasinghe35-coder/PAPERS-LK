@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Papers — PAPERS LK</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-logo" onclick="window.location.href='index.html'">PAPERS <span>LK</span></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="stream.html?id=science" id="nav-science">Science</a>
+        <a href="stream.html?id=commerce" id="nav-commerce">Commerce</a>
+        <a href="stream.html?id=arts" id="nav-arts">Arts</a>
+        <a href="stream.html?id=technology" id="nav-technology">Technology</a>
+      </div>
+      <div class="nav-search">
+        <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" class="search-input" placeholder="Search subjects...">
+        <div class="search-results"></div>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumb container" style="margin-top: calc(var(--navbar-height) + 0.5rem);">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-separator">/</span>
+    <a href="#" id="breadcrumb-stream">Stream</a>
+    <span class="breadcrumb-separator">/</span>
+    <span id="breadcrumb-subject" class="current">Subject</span>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header container" style="padding-top: 1rem;">
+    <span id="subject-stream-badge" class="badge mb-2">Stream Badge</span>
+    <h1 class="page-header-title"><span id="subject-title-text">Subject Papers</span></h1>
+    
+    <!-- Localized names container -->
+    <div id="localized-names" style="display: flex; justify-content: center; gap: 1.5rem; font-size: var(--fs-base); color: var(--text-secondary); margin-bottom: 0.5rem;">
+      <span id="sinhala-translation">සිංහල</span>
+      <span id="tamil-translation">தமிழ்</span>
+    </div>
+    
+    <p class="page-header-desc">Filter and download official past papers, marking schemes and resources.</p>
+  </header>
+
+  <!-- Main Content (Filter + Papers List) -->
+  <main class="container mb-5">
+    
+    <!-- Filter Bar -->
+    <section class="filter-bar">
+      <!-- Year Selector -->
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="year-filter">Year:</label>
+        <select id="year-filter">
+          <option value="all">All Years</option>
+          <!-- Filled dynamically by js/subject.js -->
+        </select>
+      </div>
+
+      <!-- Medium Selector -->
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label for="medium-filter">Medium:</label>
+        <select id="medium-filter">
+          <option value="all">All Mediums</option>
+          <option value="sinhala">Sinhala (සිංහල)</option>
+          <option value="tamil">Tamil (தமிழ்)</option>
+          <option value="english">English (English)</option>
+        </select>
+      </div>
+
+      <!-- Type Filter Pills -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <label>Type:</label>
+        <div class="filter-pills" id="type-filter">
+          <button class="filter-pill active" data-type="all">All Types</button>
+          <button class="filter-pill" data-type="question-paper">Question Papers</button>
+          <button class="filter-pill" data-type="marking-scheme">Marking Schemes</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table of Papers -->
+    <section class="papers-table-wrapper" id="papers-table-container">
+      <table class="papers-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Resource Title</th>
+            <th>Medium</th>
+            <th>Type</th>
+            <th>File Size</th>
+            <th style="text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="papers-table-body">
+          <!-- Rendered dynamically by js/subject.js -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Empty State -->
+    <section class="empty-state hidden" id="empty-state">
+      <div class="empty-state-icon">📂</div>
+      <h3 class="mb-2">No Papers Found</h3>
+      <p class="text-secondary fs-sm max-width-400">Try adjusting your filters (year, medium, or resource type) to find the papers you are looking for.</p>
+    </section>
+
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Core Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Subject Page Script -->
+  <script src="js/subject.js"></script>
+</body>
+</html>

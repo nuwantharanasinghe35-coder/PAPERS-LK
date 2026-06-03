@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Subjects — PAPERS LK</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-logo" onclick="window.location.href='index.html'">PAPERS <span>LK</span></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="stream.html?id=science" id="nav-science">Science</a>
+        <a href="stream.html?id=commerce" id="nav-commerce">Commerce</a>
+        <a href="stream.html?id=arts" id="nav-arts">Arts</a>
+        <a href="stream.html?id=technology" id="nav-technology">Technology</a>
+      </div>
+      <div class="nav-search">
+        <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" class="search-input" placeholder="Search subjects...">
+        <div class="search-results"></div>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumb container" style="margin-top: calc(var(--navbar-height) + 0.5rem);">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-separator">/</span>
+    <span id="breadcrumb-stream" class="current">Stream</span>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header container" style="padding-top: 1rem;">
+    <span id="stream-badge" class="badge mb-2">Stream Badge</span>
+    <h1 class="page-header-title"><span id="stream-title-text">Stream Subjects</span></h1>
+    <p id="stream-desc" class="page-header-desc">Explore the complete archive of past papers and marking schemes for this subject stream.</p>
+  </header>
+
+  <!-- Subjects Grid -->
+  <main class="container mb-5">
+    <div class="subject-grid" id="subjects-container">
+      <!-- Generated dynamically by js/stream.js -->
+    </div>
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Core Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Stream Page Script -->
+  <script src="js/stream.js"></script>
+</body>
+</html>
