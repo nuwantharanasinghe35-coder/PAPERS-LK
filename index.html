@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAPERS LK — Sri Lanka GCE A/L Past Papers Archive</title>
+  <meta name="description" content="Download Sri Lanka GCE Advanced Level past papers, marking schemes and model answers for Science, Commerce, Arts, and Technology streams in Sinhala, Tamil, and English mediums.">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-logo" onclick="window.location.href='index.html'">PAPERS <span>LK</span></div>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="stream.html?id=science">Science</a>
+        <a href="stream.html?id=commerce">Commerce</a>
+        <a href="stream.html?id=arts">Arts</a>
+        <a href="stream.html?id=technology">Technology</a>
+      </div>
+      <div class="nav-search">
+        <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" class="search-input" placeholder="Search subjects...">
+        <div class="search-results"></div>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div class="hero-shape hero-shape--4"></div>
+    
+    <div class="hero-content container">
+      <div class="hero-tag">
+        <span>🎓</span> SRI LANKA GCE A/L
+      </div>
+      <h1 class="hero-title">Master Your Exams with <span class="gradient-word">PAPERS LK</span></h1>
+      <p class="hero-subtitle">Access the largest free collection of Advanced Level past papers, official marking schemes, and resources. Organized for all subject streams and available in Sinhala, Tamil, and English.</p>
+      <div class="hero-actions">
+        <a href="#streams-section" class="btn btn-primary">Browse Papers</a>
+        <a href="#features-section" class="btn btn-secondary">Why PAPERS LK?</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Statistics Bar -->
+  <div class="container">
+    <section class="stats-bar animate-on-scroll">
+      <div class="stat-item">
+        <div id="stat-papers" class="stat-number">0</div>
+        <div class="stat-label">Past Papers</div>
+      </div>
+      <div class="stat-item">
+        <div id="stat-subjects" class="stat-number">0</div>
+        <div class="stat-label">Subjects</div>
+      </div>
+      <div class="stat-item">
+        <div id="stat-years" class="stat-number">0</div>
+        <div class="stat-label">Years of Archives</div>
+      </div>
+      <div class="stat-item">
+        <div id="stat-streams" class="stat-number">0</div>
+        <div class="stat-label">Subject Streams</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Streams Grid Section -->
+  <main id="streams-section" class="container mt-5 mb-5">
+    <div class="section-header text-center mb-4">
+      <h2 class="gradient-text font-800">Select Your Stream</h2>
+      <p class="text-secondary max-width-600 margin-center">Choose your academic subject stream to find question papers and marking schemes tailored to your curriculum.</p>
+    </div>
+
+    <div class="stream-grid animate-on-scroll" id="streams-container">
+      <!-- Generated dynamically by js/home.js -->
+    </div>
+  </main>
+
+  <!-- Features Section -->
+  <section id="features-section" class="features bg-secondary">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <h2 class="gradient-text font-800">Designed for Smart Learning</h2>
+        <p class="text-secondary max-width-600 margin-center">A clean, focused, and intuitive experience built specifically for Sri Lankan Advanced Level students.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title mb-2">Fast & Free Downloads</h3>
+          <p class="text-secondary fs-sm">Download papers in one click with zero speed limits, intrusive ads, or registration walls.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🌐</div>
+          <h3 class="feature-title mb-2">Trilingual Support</h3>
+          <p class="text-secondary fs-sm">Search and download exam papers available in Sinhala (සිංහල), Tamil (தமிழ்), and English mediums.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">📂</div>
+          <h3 class="feature-title mb-2">Marking Schemes Included</h3>
+          <p class="text-secondary fs-sm">Access official evaluation criteria and marking schemes right alongside the question papers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Core Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Home Page Script -->
+  <script src="js/home.js"></script>
+</body>
+</html>
